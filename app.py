@@ -153,111 +153,7 @@ def heart_predict():
     return render_template('heart_predict.html', value=a)
 
 
-# ---------------Kidney Prediction-------------------------
 
-
-@app.route('/kidney1')
-def kidney1():
-    return render_template('kidney_1.html')
-
-
-@app.route('/kidney2', methods=['POST'])
-def kidney2():
-
-    if len(User.query.all()) > 0:
-        for i in User.query.all():
-
-            db.session.delete(i)
-            db.session.commit()
-
-        data = User(id=1,
-                    age=float(request.form['age']),
-                    bp=float(request.form['bp']),
-                    sg=float(request.form['sg']),
-                    al=float(random.randint(0, 5)),
-                    su=float(random.randint(0, 5)),
-                    rbc=float(request.form['rbc']),
-                    pc=float(request.form['pc']),
-                    pcc=float(request.form['pcc']),
-                    ba=float(request.form['ba']),
-                    bu=float(request.form['bu']),
-                    sc=float(request.form['sc']),
-                    sod=float(request.form['sod']))
-
-        db.session.add(data)
-        db.session.commit()
-
-    else:
-
-        data = User(id=1,
-                    age=float(request.form['age']),
-                    bp=float(request.form['bp']),
-                    sg=float(request.form['sg']),
-                    al=float(random.randint(0, 5)),
-                    su=float(random.randint(0, 5)),
-                    rbc=float(request.form['rbc']),
-                    pc=float(request.form['pc']),
-                    pcc=float(request.form['pcc']),
-                    ba=float(request.form['ba']),
-                    bu=float(request.form['bu']),
-                    sc=float(request.form['sc']),
-                    sod=float(request.form['sod']))
-
-        db.session.add(data)
-        db.session.commit()
-
-    return render_template('kidney_2.html')
-
-
-@app.route('/kidney_predict', methods=['POST'])
-def kidney_predict():
-
-    model = pickle.load(open('Models/kidney.pkl', 'rb'))
-    data_array = list()
-
-    # Form 1
-
-    database = User.query.filter_by(id=1).first()
-
-    age = database.age
-    bp = database.bp
-    sg = database.sg
-    al = database.al
-    su = database.su
-    rbc = database.rbc
-    pc = database.pc
-    pcc = database.pcc
-    ba = database.ba
-    bu = database.bu
-    sc = database.sc
-    sod = database.sod
-
-    # Form 2
-
-    pot = float(request.form['pot'])
-    hemo = float(request.form['hemo'])
-    pcv = float(request.form['pcv'])
-    wc = float(request.form['wc'])
-    rc = float(request.form['rc'])
-    htn = float(request.form['htn'])
-    dm = float(request.form['dm'])
-    cad = float(request.form['cad'])
-    appet = float(request.form['appet'])
-    pe = float(request.form['pe'])
-    ane = float(random.randint(0, 2))
-
-    data_array = data_array + [age, bp, sg, al, su, rbc, pc, pcc, ba, bu, sc, sod,
-                               pot, hemo, pcv, wc, rc, htn, dm, cad, appet, pe, ane]
-
-    data = np.array([data_array])
-    value = int(model.predict(data))
-
-    if value == 0:
-        a = "Congratulations!! You Have Low Risk Of Kidney Failure"
-    else:
-        a = "Sorry!! You Have High Risk Of Kidney Failure"
-
-    return render_template('kidney_predict.html', value=a)
 
 
 # ---------------Liver Prediction-------------------------
@@ -297,5 +193,7 @@ def liver_predict():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
 
 
