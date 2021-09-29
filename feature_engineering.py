@@ -1,9 +1,13 @@
 
+
 # Importing Libraries
 
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
 
 from dataprep import EDA
 
@@ -91,7 +95,9 @@ class FeatEng():
         target = self.target
         y = data[target]
         x = data.drop(target, axis=1)
-        x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=0)
+        x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=0)
 
         return [x, y, x_train, x_test, y_train, y_test]
+
+
 
