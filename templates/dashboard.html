@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Medical Profiling System | Get Started</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+	<link rel="stylesheet" type="text/css" href="static/css/aboutus.css">
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
+    <df-messenger
+    chat-title="Doctor Appointment ChatBot"
+    agent-id="c4ca0e65-ccf0-4e32-950c-07ecc89c6c01"
+    language-code="en"></df-messenger>
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <script>
+      //To minimise the height of chatbox
+      $(document).ready(function() {
+          window.addEventListener('dfMessengerLoaded', function (event) {
+          $r1 = document.querySelector("df-messenger");
+          $r2 = $r1.shadowRoot.querySelector("df-messenger-chat");
+          $r3 = $r2.shadowRoot.querySelector("df-messenger-user-input"); //for other mods
+          var sheet = new CSSStyleSheet;
+          // manage box height from here
+          sheet.replaceSync( `div.chat-wrapper[opened="true"] { height: 350px }`);
+          $r2.shadowRoot.adoptedStyleSheets = [ sheet ];
+          });
+      });
+  </script>
+  </head>
+<body>
+    <form id="form1">
+        <header>
+            <!--Navigation Bar-->
+			<nav class="navbar navbar-expand-md navbar-dark fixed-top nav-bg">
+                <a class="navbar-brand" href="#"><b>&nbsp;&nbsp;&nbsp;MPS.</b></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/dashboard">Get Started</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/disindex">Disease Index</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/diabetes">Diabetes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/heart">Heart Disease</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/kidney">Kidney Disease</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/liver">Liver Disease</a>
+                    </li>
+                    <li class="nav-item">
+		                <a class="nav-link" href="/logout">Logout</a>
+		            </li>
+                    </ul>
+                </div>
+            </nav>
+
+         <main role="main">
+
+  <div class="jumbotron new-container">
+    <div class="container">
+      <h1 class="display-4">Hello! Lets Get Started with Prediction</h1>
+      <p>Welcome to Medical Profiling System!, a risk assessment system for medical institutions to generate risk assessments for their patients. Medical Profiling System started off as a company that formed strong relationships with medical institutions to help them generate their assessments with ease and maximum efficiency thus saving the organization's valuable time.
+          Click below to learn about the diseases that Medical Profiling System is capable of assessing.</p>
+      <p><a class="btn new-btn btn-lg" href="/disindex" role="button">Get Started &raquo;</a></p>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-4">
+        <h2>1. Diabetes Prediction</h2>
+        <p>Navigate to the "Diabetes" section and add the corresponding details and click on predict to learn whether the patient is at the risk of this illness/disease.</p>
+
+      </div>
+      <div class="col-md-4">
+        <h2>2. Heart Disease</h2>
+        <p>Navigate to the "Heart Disease" section and add the corresponding details and click on predict to learn whether the patient is at the risk of this illness/disease.</p>
+
+      </div>
+      <div class="col-md-4">
+        <h2>3. Kidney Disease</h2>
+        <p>Navigate to the "Kidney Disease" section and add the corresponding details and click on predict to learn whether the patient is at the risk of this illness/disease.</p>
+
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      
+      <div class="col-md-4">
+        <h2>4. Liver Disease </h2>
+        <p>Navigate to the "Liver Disease" section and add the corresponding details and click on predict to learn whether the patient is at the risk of this illness/disease.</p>
+
+      </div>
+      <div class="col-md-4">
+        <h2>5. Disease Index</h2>
+        <p>Navigate to the "Disease Index" section and gain in-depth information about each of these diseases.</p>
+
+      </div>
+    </div>
+    </div>
+    <hr>
+  </div>
+</main>
+
+
+<footer class="footer-container">
+  <p>&copy;Medical Profiling System. All Rights Reserved</p>
+</footer>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../assets/dist/js/bootstrap.bundle.js"></script>
+
+    </form>
+</body>
+</html>
+
+

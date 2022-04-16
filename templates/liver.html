@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
+	<title>MPS | Liver Disease Prediction</title>
+  <df-messenger
+  chat-title="Doctor Appointment ChatBot"
+  agent-id="c4ca0e65-ccf0-4e32-950c-07ecc89c6c01"
+  language-code="en"></df-messenger>
+  <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+  <script>
+    //To minimise the height of chatbox
+    $(document).ready(function() {
+        window.addEventListener('dfMessengerLoaded', function (event) {
+        $r1 = document.querySelector("df-messenger");
+        $r2 = $r1.shadowRoot.querySelector("df-messenger-chat");
+        $r3 = $r2.shadowRoot.querySelector("df-messenger-user-input"); //for other mods
+        var sheet = new CSSStyleSheet;
+        // manage box height from here
+        sheet.replaceSync( `div.chat-wrapper[opened="true"] { height: 350px }`);
+        $r2.shadowRoot.adoptedStyleSheets = [ sheet ];
+        });
+    });
+</script>
+</head>
+<style>
+	button
+{
+	border-style:none;
+}
+
+h1, h2, h3, h4, h5{
+    text-align: center;
+
+}
+
+form {
+	margin-top: 3%;
+	margin-left: 29%;
+	margin-right: 21%;
+
+}
+
+form fieldset{
+	padding: 30px;
+	border-width: 5px;
+	border-style: solid;
+  border-radius: 10px;
+    border-color: #102E4A;
+	background-color: #fff;
+}
+
+fieldset h1 {
+	color:#102E4A;
+	padding-bottom: 20px;
+	margin-left: 35px;
+	display: inline-block;
+	cursor: pointer;
+	font-size: 28px;
+	text-align: left;
+}
+
+fieldset label {
+	margin-left: 20px;
+	margin-right: 40px;
+	padding: 23px;
+	font-size: 20px;
+	display: inline-block;
+  text-align: left;
+    width  : 240px;
+}
+fieldset input{
+	padding: 8px;
+	color: #938c8c;
+}
+fieldset input:focus{
+	color: #000;
+}
+fieldset button
+{
+	margin-left: 60px;
+	color: #fff;
+	background-color: #5a5a5a;
+	border-radius: 3px;
+	padding: 13px 39px;
+	text-align: center;
+	letter-spacing: 0.9px;
+	text-decoration: none;
+	margin-right: 15px;
+	line-height: 26px;
+	font-size: 16px;
+	box-shadow: 0px 1px 3px 0px #5a5a5a;
+	right: 0px;
+	margin-top: 15px;
+}
+
+
+.submit{
+	margin-left: 60px;
+	color: #fff;
+	background-color: #5a5a5a;
+	border-radius: 3px;
+	padding: 13px 39px;
+	text-align: center;
+	letter-spacing: 0.9px;
+	text-decoration: none;
+	margin-right: 10px;
+	line-height: 26px;
+	font-size: 16px;
+	box-shadow: 0px 1px 3px 0px #5a5a5a;
+	right: 100px;
+	margin-top: 15px;
+}
+
+#link_to_edit{
+    padding-left: 45px;
+}
+
+.fieldset{
+	margin-top: 3%;
+	margin-left: 0%;
+	margin-right: 0%;
+	padding: 30px;
+	border-width: 25px;
+	border-style: ridge;
+	border-color: #257a7a;
+	box-shadow: 6px 13px 13px 0px black;
+	background-color: #ebfffa;
+}
+</style>
+<body>
+
+	<header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top nav-bg">
+                <a class="navbar-brand" href="#"><b>&nbsp;&nbsp;&nbsp;MPS.</b></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard">Get Started</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/disindex">Disease Index</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/diabetes">Diabetes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/heart">Heart Disease</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/kidney">Kidney Disease</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/liver">Liver Disease</a>
+                    </li>
+                    <li class="nav-item">
+		                <a class="nav-link" href="#">|</a>
+		            </li>
+                    <li class="nav-item">
+		                <a class="nav-link" href="/logout">Logout</a>
+		            </li>
+                    </ul>
+                </div>
+            </nav>
+    </header><br/><br/>
+    <h1 style="text-align:center;">Liver Disease Prediction</h1>
+    <h5 style="text-align:center;">Please enter the patient details</h5>
+    <h5 style="text-align:center;">To Know more about these terms, <a href="/disindex"  target="_blank">Click this link</a></h5>
+    <form action="{{ url_for('predictliver')}}" method="post" class="form-inline">
+        <fieldset>
+          <div class="tabcontent" id="new">
+              <div class="form-group">
+                <label for="Total Bilirubin">Total Bilirubin: (Values between 0 to 75)</label>
+                <input class="form-control" type="number" id="Total Bilirubin" name="Total Bilirubin" required="required" placeholder="Values between 0 to 75">
+              </div>
+              <div class="form-group">
+                <label for="Direct_Bilirubin">Direct Bilirubin: (Values between 0.1 to 19.7)</label>
+                <input class="form-control" type="number" step="any" id="Direct_Bilirubin" name="Direct_Bilirubin" required="required" placeholder="Values between 0.1 to 19.7">
+              </div>
+              <div class="form-group">
+                <label for="Alkaline_Phosphotase">Alkaline Phosphotase: (Values between 60 to 2100)</label>
+                <input class="form-control" type="number" id="Alkaline_Phosphotase" name="Alkaline_Phosphotase" required="required" placeholder="Values between 60 to 2100">
+              </div>
+              <div class="form-group">
+                <label for="Alamine_Aminotransferase">Alamine Aminotransferase: (Values between 10 to 2000)</label>
+                <input class="form-control" type="number" id="Alamine_Aminotransferase" name="Alamine_Aminotransferase" required="required" placeholder="Values between 10 to 2000">
+              </div>
+              <div class="form-group">
+                <label for="Total_Protiens">Total Protiens: (Values between 2.5 to 9.5)</label>
+                <input class="form-control" type="number" id="Total_Protiens" name="Total_Protiens" required="required" placeholder="Values between 2.5 to 9.5">
+              </div>
+              <div class="form-group">
+                <label for="Albumin">Albumin: (Values between 0.9 to 5.5)</label>
+                <input class="form-control" type="number" id="Albumin" name="Albumin" required="required" placeholder="Values between 0.9 to 5.5">
+              </div>
+              <div class="form-group">
+                <label for="Albumin_and_Globulin_Ratio">Albumin and Globulin Ratio: (Values between 0.3 to 2.8)</label>
+                <input class="form-control" type="number" id="Albumin_and_Globulin_Ratio" name="Albumin_and_Globulin_Ratio" required="required" placeholder="Values between 0.3 to 2.8">
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="btn new-btn btn-lg">Predict</button>
+        </div>
+      </fieldset>
+    </form><br>
+    <footer>
+      <div class="container-fluid padding">
+      <div class="row text-center">
+          <div class="col-md-4">
+              <hr class="light">
+              <h5>Contact Details</h5>
+              <hr class="light">
+              <p>+91 984567892</p>
+              <p>contactus@mps.com</p>
+              <p>1901/B, Ram nivas</p>
+              <p>Mumbai, Maharashtra,400066</p>
+          </div>
+          <div class="col-md-4">
+              <hr class="light" />
+              <h5>Our Hours</h5>
+              <hr class="light" />
+              <p>Monday: 9pm-5pm</p>
+              <p>Saturday:10am-4pm</p>
+              <p>Sunday: Closed</p>
+          </div>
+          <div class="col-md-4">
+              <hr class="light">
+              <h5>Service Areas</h5>
+              <hr class="light" />
+              <p>Mumbai, Maharashtra</p>
+              <p>Ahmedabad, Gujarat</p>
+              <p>Chennai, Tamil Nadu</p>
+              <p>Bhopal, Madhya Pradesh</p>
+          </div>
+          <div class="col-12">
+              <hr class="light" />
+              <h5>&copy;mps.com</h5>
+          </div>
+      </div>
+      </div>
+  </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
